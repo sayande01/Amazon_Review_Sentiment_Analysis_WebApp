@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1, width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <title>Amazon Alexa Sentiment Analysis Dashboard</title>
+
+  <style>
+    html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0; /* Remove any default margin */
+        padding: 0; /* Remove any default padding */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Helvetica';
+        background: #000;
+        color: #fff;
+        font-size: 24px;
+        text-align: center;
+        letter-spacing: 1.4px;
+    }
+
+    header .logo h1 {
+        font-size: 45px;
+        font-weight: 700;
+        color: #ff9800;
+        text-align: center;
+    }
+
+    header .logo .subtitle {
+        font-size: 16px;
+        color: #dfe6e9;
+        font-weight: 400;
+        margin-top: 5px;
+    }
+
+    .login {
+        width: 400px;
+        height: 400px;
+    }
+
+    .login h1 {
+        color: #fff;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        letter-spacing: 1px;
+        text-align: center;
+    }
+
+    input {
+        width: 100%;
+        margin-bottom: 10px;
+        background: rgba(0, 0, 0, 0.3);
+        border: none;
+        outline: none;
+        padding: 10px;
+        font-size: 15px;  
+        color: #fff;
+        border: 3px solid rgba(0, 0, 0, 0.3);
+        border-radius: 6px;
+        transition: box-shadow 0.5s ease;
+    }
+
+    input:focus {
+        box-shadow: 0 0 10px rgba(0, 0, 255, 0.7);
+    }
+
+    button {
+        background-color: #4CAF50; /* Green color */
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #45a049; /* Darker shade of green */
+    }
+
+    .navbar-brand {
+        font-size: 42px;
+        text-decoration: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 20px;
+        white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <h1>Amazon Alexa Sentiment Analysis Dashboard</h1>
+
+    <img src="{{ url_for('static', filename='Images/amazon.jpg') }}" alt="Amazon Alexa Logo" class="header-logo">
+    
+    <p class="subtitle">AI-powered insights from customer reviews</p>
+  </div>
+</header>
+
+<nav class="bg-light border navbar navbar-expand-md navbar-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+    </a>
+  </div>
+</nav>
+
+<div class="container-fluid py-5 text-center">
+  <div class="login">
+    <h1>Sentiment Analysis</h1>
+    <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}" method="post">
+      <input type="text" name="Enter the product review here" placeholder="Enter the product review here" required="required" />
+      <button type="submit" class="btn btn-primary btn-block btn-large">Predict Sentiment</button>
+    </form>
+    <br><br>
+    {{ prediction_text }}
+    <p style="font-size: 12px; margin-top: 20px;">Powered by Machine Learning and Natural Language Processing</p>
+  </div>
+</div>
+
+</body>
+</html>
